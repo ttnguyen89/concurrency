@@ -1,0 +1,25 @@
+package nguyentt.coursera.concurrency;
+
+import static edu.rice.pcdp.PCDP.async;
+import static edu.rice.pcdp.PCDP.finish;
+
+public final class Setup {
+
+	private Setup() {
+    }
+
+    /**
+     * A simple method for testing compilation of an PCDP project.
+     * @param val Input value
+     * @return Dummy value
+     */
+    public static int setup(final int val) {
+        final int[] result = new int[1];
+        finish(() -> {
+            async(() -> {
+                result[0] = val;
+            });
+        });
+        return result[0];
+    }
+}
